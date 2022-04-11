@@ -1,20 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 
-import styled from 'styled-components/native'
+import {NavigationContainer} from '@react-navigation/native'
+import {BottomTabsNavigator} from './src/navigations/BottomTabs.navigator';
 
-export default function App() {
+export default function App<React,FC>() {
   return (
-    <Container>
-      <Text>Hola mundo!</Text>
-      <StatusBar style="auto" />
-    </Container>
-  );
+    <NavigationContainer>
+    <BottomTabsNavigator />
+   </NavigationContainer>
+  )
 }
-
-const Container = styled.View`
-flex: 1;
-background-color: #fff;
-align-items: center;
-justify-content: center;
-`;
