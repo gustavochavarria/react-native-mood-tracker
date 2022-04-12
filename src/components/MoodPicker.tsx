@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Text, View } from "react-native";
 
 import styled from "styled-components/native";
 
-import { MoodOptionType } from "../types/default";
+import { MoodOptionType } from "../types";
 
 const moodOptions: MoodOptionType[] = [
   { emoji: "🧑‍💻", description: "studious" },
@@ -13,8 +13,19 @@ const moodOptions: MoodOptionType[] = [
   { emoji: "😤", description: "frustrated" },
 ];
 
-export const MoodPicker: React.FC = () => {
+type MoodPickerProps = {
+  onSelect: (mood: MoodOptionType) => void;
+};
+
+export const MoodPicker: React.FC<MoodPickerProps> = ({ onSelect }) => {
   const [selected, setSelected] = useState<MoodOptionType>();
+
+  const handleOnSelect = useCallback(() => {
+    if (selected) {
+      onSelect(selected);
+      setSelected(undefined);
+    }
+  }, [onSelect, selected]);
 
   return (
     <Container>
@@ -25,10 +36,9 @@ export const MoodPicker: React.FC = () => {
       <BoxFeeling>
         {moodOptions.map((option) => {
           return (
-            <AvatarSection>
+            <AvatarSection key={option.emoji}>
               <AvatarBtn
                 onPress={() => setSelected(option)}
-                key={option.emoji}
                 style={[
                   option.emoji === selected?.emoji
                     ? {
@@ -51,7 +61,7 @@ export const MoodPicker: React.FC = () => {
       </BoxFeeling>
 
       <Button>
-        <ButtonText>Choose</ButtonText>
+        <ButtonText onPress={handleOnSelect}>Choose</ButtonText>
       </Button>
     </Container>
   );
@@ -83,8 +93,8 @@ const AvatarBtn = styled.Pressable`
   height: 60px;
   justify-content: center;
   align-items: center;
-  border-radius: 30;
-  margin-bottom: 5;
+  border-radius: 30px;
+  margin-bottom: 5px;
 `;
 
 const Description = styled.Text`
