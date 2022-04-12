@@ -1,11 +1,14 @@
+import { NavigationContainer } from "@react-navigation/native";
+import { BottomTabsNavigator } from "./src/navigations/BottomTabs.navigator";
 
-import {NavigationContainer} from '@react-navigation/native'
-import {BottomTabsNavigator} from './src/navigations/BottomTabs.navigator';
+import { AppProvider } from "./src/App.provider";
 
-export default function App<React,FC>() {
+export default function App<React, FC>() {
   return (
-    <NavigationContainer>
-    <BottomTabsNavigator />
-   </NavigationContainer>
-  )
+    <AppProvider>
+      <NavigationContainer>
+        <BottomTabsNavigator />
+      </NavigationContainer>
+    </AppProvider>
+  );
 }
