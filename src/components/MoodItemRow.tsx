@@ -2,8 +2,10 @@ import React from "react";
 import { format } from "date-fns";
 import styled from "styled-components/native";
 
-import { MoodOptionWithTimestamp } from "../types";
 import { Pressable } from "react-native";
+import { PanGestureHandler } from "react-native-gesture-handler";
+
+import { MoodOptionWithTimestamp } from "../types";
 import { useAppContext } from "../App.provider";
 
 type MoodItemProps = {

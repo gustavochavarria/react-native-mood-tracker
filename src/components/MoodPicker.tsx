@@ -1,9 +1,5 @@
 import { useCallback, useState } from "react";
-import { Pressable, Text, Animated } from "react-native";
-import Reanimated, {
-  useAnimatedStyle,
-  withTiming,
-} from "react-native-reanimated";
+import { Text, View } from "react-native";
 
 import styled from "styled-components/native";
 
@@ -64,9 +60,14 @@ export const MoodPicker: React.FC<MoodPickerProps> = ({ onSelect }) => {
         })}
       </BoxFeeling>
 
-      <Button onPress={handleOnSelect}>
-        <ButtonText>Choose</ButtonText>
-      </Button>
+      <View style={{ alignItems: "center" }}>
+        <Button
+          onPress={handleOnSelect}
+          style={[selected ? { opacity: 1 } : { opacity: 0.7 }]}
+        >
+          <ButtonText>Choose</ButtonText>
+        </Button>
+      </View>
     </Container>
   );
 };
@@ -108,10 +109,10 @@ const Description = styled.Text`
   text-align: center;
 `;
 
-const Button = styled.TouchableOpacity`
+const Button = styled.Pressable`
   border-radius: 40px;
   background-color: #454c73;
-  width: 100px;
+  width: 150px;
   height: 50px;
   justify-content: center;
   align-items: center;
