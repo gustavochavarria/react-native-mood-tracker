@@ -1,5 +1,9 @@
 import { useCallback, useState } from "react";
-import { Text, View } from "react-native";
+import { Pressable, Text, Animated } from "react-native";
+import Reanimated, {
+  useAnimatedStyle,
+  withTiming,
+} from "react-native-reanimated";
 
 import styled from "styled-components/native";
 
@@ -60,8 +64,8 @@ export const MoodPicker: React.FC<MoodPickerProps> = ({ onSelect }) => {
         })}
       </BoxFeeling>
 
-      <Button>
-        <ButtonText onPress={handleOnSelect}>Choose</ButtonText>
+      <Button onPress={handleOnSelect}>
+        <ButtonText>Choose</ButtonText>
       </Button>
     </Container>
   );
