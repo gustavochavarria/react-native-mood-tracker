@@ -3,12 +3,16 @@ import { format } from "date-fns";
 import styled from "styled-components/native";
 
 import { MoodOptionWithTimestamp } from "../types";
+import { Pressable } from "react-native";
+import { useAppContext } from "../App.provider";
 
 type MoodItemProps = {
   item: MoodOptionWithTimestamp;
 };
 
 export const MoodItemRow: React.FC<MoodItemProps> = ({ item }) => {
+  const appContext = useAppContext();
+
   const formatTimestamp = (time: number) => {
     return format(new Date(time), "dd MMM, yyyy 'at' hh:mm aaa");
   };
@@ -21,6 +25,9 @@ export const MoodItemRow: React.FC<MoodItemProps> = ({ item }) => {
       </IconAndDescription>
 
       <MoodDate>{formatTimestamp(item.timestamp)}</MoodDate>
+      <Pressable hitSlop={16} onPress={() => appContext.handleDeleteMood(item)}>
+        <DeleteText>Delete</DeleteText>
+      </Pressable>
     </MoodItem>
   );
 };
@@ -41,7 +48,7 @@ const IconAndDescription = styled.View`
 `;
 
 const MoodValue = styled.Text`
-  text-align: center;
+  text-align: left;
   font-size: 40px;
   margin-right: 10px;
 `;
@@ -55,4 +62,8 @@ const MoodDescription = styled.Text`
 const MoodDate = styled.Text`
   text-align: center;
   color: #87677b;
+`;
+
+const DeleteText = styled.Text`
+  color: blue;
 `;
