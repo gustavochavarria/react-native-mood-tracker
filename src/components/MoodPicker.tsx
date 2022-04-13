@@ -104,7 +104,7 @@ const Description = styled.Text`
   text-align: center;
 `;
 
-const Button = styled.Pressable`
+const Button = styled.TouchableOpacity`
   border-radius: 40px;
   background-color: #454c73;
   width: 100px;
